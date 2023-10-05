@@ -1,18 +1,17 @@
 FROM --platform=linux/amd64 gitlab-registry.cern.ch/linuxsupport/alma9-base
-LABEL maintainer="Dennis Lee <dylee.fnal.gov>"
+LABEL maintainer="Dennis Lee <dylee@fnal.gov>"
 
 RUN dnf install -y 'dnf-command(config-manager)' && \
     dnf config-manager --add-repo https://linuxsoft.cern.ch/cern/alma/9/devel/x86_64/os
 
 RUN dnf update -y && \
     dnf install -y epel-release redhat-lsb-core yum-utils && \
-    dnf install -y  glibc-devel gdb time git \
+    dnf install -y  glibc-devel gdb time git tmux \
         vim gcc perf htop libtool autoconf automake && \
     dnf install -y openssl-devel tar zip xz bzip2 patch wget which sudo strace && \
     dnf install -y make && \
     dnf config-manager --set-enabled crb && \
-    dnf install -y ftgl libGLEW gl2ps root-graf-asimage \
-        autoconf-archive pkgconfig curl lsof && \
+    dnf install -y autoconf-archive pkgconfig curl lsof && \
     dnf clean all
 
 RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
